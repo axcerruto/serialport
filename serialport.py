@@ -52,7 +52,7 @@ class SerialPort:
 		'''
 		self.ser.write(b)
 
-	def close()
+	def close():
 		self.ser.close()
 
 
