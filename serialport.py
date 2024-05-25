@@ -3,7 +3,6 @@
 import glob
 import serial
 from sys import platform
-from time import sleep
 
 class SerialPort:
 	'''
