@@ -36,23 +36,23 @@ class SerialPort:
 		except:
 			print("ERROR: no port found")
 
-	def readline():
+	def readline(self):
 		line = self.ser.readline()
 		return line.decode('utf-8')
 
 	def readbytes(nbytes):
 		return self.ser.read(nbytes)
 
-	def writestring(s):
+	def writestring(self, s):
 		self.ser.write(s.encode('utf-8'))
 
-	def writesbytes(b):
+	def writesbytes(self, b):
 		''' 
 		input in format b'\x01\x02\x03\x04'
 		'''
 		self.ser.write(b)
 
-	def close():
+	def close(self):
 		self.ser.close()
 
 
