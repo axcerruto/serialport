@@ -11,16 +11,20 @@ class SerialPort:
 	'''
 
 	def __init__(self,
-				baud=250000,
+				baud=115200,
 				rtscts=False,
 				timeout=0,
-				write_timeout=0):
+				write_timeout=0,
+				modem=False):
 		self.ser = None
 		self.port = None
 		try:
 			# list arduino ports: /dev/tty.usbmodem*
 			if platform == 'darwin':	# MACOS
-				self.port = glob.glob('/dev/tty.usbserial*')[0]
+				if(modem):
+					self.port = glob.glob('/dev/tty.usbmodem*')[0]
+				else:
+					self.port = glob.glob('/dev/tty.usbserial*')[0]
 			else:
 				self.port = '/dev/ttyUSB0'
 
@@ -40,7 +44,7 @@ class SerialPort:
 		line = self.ser.readline()
 		return line.decode('utf-8')
 
-	def readbytes(nbytes):
+	def readbytes(self, nbytes):
 		return self.ser.read(nbytes)
 
 	def writestring(self, s):
@@ -58,7 +62,7 @@ class SerialPort:
 
 if __name__ == "__main__":
     # execute only if run as a script
-    ser = SerialPort(baud=9600)
+    ser = SerialPort(baud=115200, modem=True)
     # for i in range(50):
     	# ser.writestring(str(i))
     while True:
